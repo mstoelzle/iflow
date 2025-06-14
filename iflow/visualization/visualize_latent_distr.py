@@ -12,9 +12,6 @@ def visualize_latent_distribution(val_trj, iflow, device, fig_number=1):
     val_mu_trj = []
     val_var_trj = []
 
-    if plt.fignum_exists(fig_number):
-        fig_number = None
-    plt.figure(fig_number, figsize=(20,int(10*dim)))
     fig, axs = plt.subplots(dim, 1, num=fig_number)
     for i in range(len(val_trj)):
         y_trj = to_torch(val_trj[i],device)
