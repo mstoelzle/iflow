@@ -11,6 +11,12 @@ import numpy as np
 from iflow.visualization import visualize_vector_field, visualize_2d_generated_trj, save_vector_field
 from iflow.test_measures.log_likelihood import cycle_log_likelihood
 
+# set torch random seed for reproducibility
+seed = 1
+np.random.seed(seed)
+torch.manual_seed(seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 percentage = .99
 batch_size = 100
