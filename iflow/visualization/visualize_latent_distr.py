@@ -12,7 +12,9 @@ def visualize_latent_distribution(val_trj, iflow, device, fig_number=1):
     val_mu_trj = []
     val_var_trj = []
 
-    plt.figure(fig_number, figsize=(20,int(10*dim))).clf()
+    if plt.fignum_exists(fig_number):
+        fig_number = None
+    plt.figure(fig_number, figsize=(20,int(10*dim)))
     fig, axs = plt.subplots(dim, 1, num=fig_number)
     for i in range(len(val_trj)):
         y_trj = to_torch(val_trj[i],device)
@@ -66,8 +68,11 @@ def visualize_vector_field(val_trj, iflow, device, fig_number=1):
     speed = np.sqrt(vel_x ** 2 + vel_y ** 2)
     speed = speed/np.max(speed)
 
-    fig = plt.figure(fig_number, figsize=(10, 10))
-    plt.clf()
+    if plt.fignum_exists(fig_number):
+        fig = plt.figure(fig_number)
+        plt.clf()
+    else:
+        fig = plt.figure(fig_number, figsize=(10, 10))
     ax = plt.gca()
 
     plt.streamplot(xy[0], xy[1], vel_x, vel_y, color=speed, density=[0.5, 1])
@@ -107,8 +112,11 @@ def save_vector_field(val_trj, iflow, device, save_fig, fig_number=1):
     speed = np.sqrt(vel_x ** 2 + vel_y ** 2)
     speed = speed/np.max(speed)
 
-    fig = plt.figure(fig_number, figsize=(10, 10))
-    plt.clf()
+    if plt.fignum_exists(fig_number):
+        fig = plt.figure(fig_number)
+        plt.clf()
+    else:
+        fig = plt.figure(fig_number, figsize=(10, 10))
     ax = plt.gca()
 
     plt.streamplot(xy[0], xy[1], vel_x, vel_y, color=speed, density=[0.5, 1])
