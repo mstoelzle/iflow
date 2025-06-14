@@ -68,8 +68,8 @@ class LULinear(Linear):
             delta_logp = self.logabsdet() * x.new_ones(y.shape[0])
         else:
             y = x - self.bias
-            y, _ = torch.triangular_solve(y.t(), lower, upper=False, unitriangular=True)
-            y, _ = torch.triangular_solve(y, upper, upper=True, unitriangular=False)
+            y = torch.linalg.solve_triangular(lower, y.t(), upper=False, unitriangular=True)
+            y = torch.linalg.solve_triangular(upper, y, upper=True, unitriangular=False)
             y = y.t()
 
             delta_logp = -self.logabsdet()
@@ -90,8 +90,8 @@ class LULinear(Linear):
         """
         lower, upper = self._create_lower_upper()
         outputs = inputs - self.bias
-        outputs, _ = torch.triangular_solve(outputs.t(), lower, upper=False, unitriangular=True)
-        outputs, _ = torch.triangular_solve(outputs, upper, upper=True, unitriangular=False)
+        outputs = torch.linalg.solve_triangular(lower, outputs.t(), upper=False, unitriangular=True)
+        outputs = torch.linalg.solve_triangular(upper, outputs, upper=True, unitriangular=False)
         outputs = outputs.t()
 
         logabsdet = -self.logabsdet()
