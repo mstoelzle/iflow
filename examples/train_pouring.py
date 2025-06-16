@@ -24,18 +24,16 @@ nr_epochs = 10000
 device = torch.device('cpu')
 
 #### Invertible Flow model #####
-def main_layer(dim):
-    return  model.CouplingLayer(dim)
-
-
-def create_flow_seq(dim, depth):
-    chain = []
-    for i in range(depth):
-        chain.append(main_layer(dim))
-        chain.append(model.RandomPermutation(dim))
-        chain.append(model.LULinear(dim))
-    chain.append(main_layer(dim))
-    return model.SequentialFlow(chain)
+# def main_layer(dim):
+#     return  model.CouplingLayer(dim)
+# def create_flow_seq(dim, depth):
+#     chain = []
+#     for i in range(depth):
+#         chain.append(main_layer(dim))
+#         chain.append(model.RandomPermutation(dim))
+#         chain.append(model.LULinear(dim))
+#     chain.append(main_layer(dim))
+#     return model.SequentialFlow(chain)
 
 
 if __name__ == '__main__':
@@ -48,7 +46,7 @@ if __name__ == '__main__':
     ######### Model #########
     dynamics = model.TanhStochasticDynamics(dim, dt=0.01, T_to_stable=1.5)
     #dynamics = model.LinearStochasticDynamics(dim, dt=0.01, T_to_stable=1.5)
-    flow = create_flow_seq(dim, depth)
+    flow = model.create_flow_seq(dim, depth)
     iflow = model.ContinuousDynamicFlow(dynamics=dynamics, model=flow, dim=dim).to(device)
     ########## Optimization ################
     params = list(flow.parameters()) + list(dynamics.parameters())

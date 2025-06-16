@@ -26,7 +26,7 @@ lr = 0.001
 weight_decay = 0.
 ## training variables ##
 nr_epochs = 1000
-filename = 'RShape'
+filename = 'OShape'
 save_folder = 'experiments'
 
 dir_save = os.path.join(os.path.dirname(__file__),save_folder)
@@ -37,18 +37,16 @@ makedirs(dir_save)
 device = torch.device('cpu')
 
 #### Invertible Flow model #####
-def main_layer(dim):
-    return  model.ResNetCouplingLayer(dim)
-
-
-def create_flow_seq(dim, depth):
-    chain = []
-    for i in range(depth):
-        chain.append(main_layer(dim))
-        chain.append(model.RandomPermutation(dim))
-        chain.append(model.LULinear(dim))
-    chain.append(main_layer(dim))
-    return model.SequentialFlow(chain)
+# def main_layer(dim):
+#     return  model.ResNetCouplingLayer(dim)
+# def create_flow_seq(dim, depth):
+#     chain = []
+#     for i in range(depth):
+#         chain.append(main_layer(dim))
+#         chain.append(model.RandomPermutation(dim))
+#         chain.append(model.LULinear(dim))
+#     chain.append(main_layer(dim))
+#     return model.SequentialFlow(chain)
 
 
 if __name__ == '__main__':
@@ -60,7 +58,7 @@ if __name__ == '__main__':
     dataloader = DataLoader(data.dataset, **params)
     ######### Model #########
     lsd = model.LinearLimitCycle(dim, device, dt=data.dt, T_period=T_period)
-    flow = create_flow_seq(dim, depth)
+    flow = model.create_flow_seq(dim, depth)
     iflow = model.ContinuousDynamicFlow(dynamics=lsd, model=flow, dim=dim).to(device)
     ########## Optimization ################
     params = list(flow.parameters()) + list(lsd.parameters())

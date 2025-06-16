@@ -22,4 +22,4 @@ setup(name='iflow',
       author_email='julen@robot-learning.de',
       packages=['iflow'],
       install_requires=requires_list,
-      )
+)
