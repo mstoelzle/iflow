@@ -145,7 +145,7 @@ def iros_evaluation(val_trajs, iflow, device):
         n_trj = trj.shape[0]
         y0 = trj[0, :]
         y0 = torch.from_numpy(y0[None, :]).float().to(device)
-        traj_pred = iflow.generate_trj( y0, T=n_trj)
+        traj_pred = iflow.generate_trj(y0, T=n_trj)
         traj_pred = traj_pred.detach().cpu().numpy()
         predicted_trajs.append(traj_pred)
 
