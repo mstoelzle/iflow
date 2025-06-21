@@ -5,11 +5,8 @@ The model is composed by a latent stochastic stable dynamic system and an invert
 The models and the learning algorithms are implemented in PyTorch.
 
 ## Installation
-Inside the repository,
 
-```
-pip install -r requirements.txt
-```
+Inside the repository,
 
 ```
 pip install -e .

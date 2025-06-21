@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "iflow"
+version = "0.0.2"
+description = "ImitationFlow: Learning Deep Stable Stochastic Dynamic Systems by Normalizing Flows"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Julen Urain", email = "julen@robot-learning.de"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "torch",
+    "torchvision", 
+    "torchdiffeq",
+    "scipy",
+    "matplotlib",
+    "scikit-learn",
+    "similaritymeasures",
+]
+
+[project.urls]
+Homepage = "https://github.com/TheCamusean/iflow"
+Repository = "https://github.com/TheCamusean/iflow"
+Issues = "https://github.com/TheCamusean/iflow/issues"
+
+[tool.setuptools]
+packages = [
+    "iflow",
+    "iflow.dataset",
+    "iflow.densities", 
+    "iflow.model",
+    "iflow.model.cflows",
+    "iflow.model.cflows.diffeq_layers",
+    "iflow.model.cflows.wrappers",
+    "iflow.model.dynamics",
+    "iflow.model.flows",
+    "iflow.model.flows.splines",
+    "iflow.model.nn",
+    "iflow.test_measures",
+    "iflow.trainers",
+    "iflow.utils",
+    "iflow.visualization",
+]
+
+[tool.setuptools.package-dir]
+"" = "."
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md"]

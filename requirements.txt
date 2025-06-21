@@ -1,7 +1,0 @@
-torch
-torchvision
-torchdiffeq
-scipy
-matplotlib
-scikit-learn
-similaritymeasures
